@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Money Audit — The 7-Day Money Reset</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #141210;
+  --paper: #F9F6F0;
+  --gold: #B8922A;
+  --gold-light: #E8D5A3;
+  --gold-pale: #FAF4E6;
+  --mid: #6B6257;
+  --border: #E4DDD3;
+  --white: #FFFFFF;
+  --green: #2A5C45;
+  --green-light: #EAF4EE;
+  --red: #8B2020;
+  --red-light: #FAEAEA;
+  --step-locked: #C4BDB5;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--ink);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--gold-light);
+  letter-spacing: 0.3px;
+}
+.header-badge {
+  background: var(--gold);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--ink);
+  padding: 64px 40px 72px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(184,146,42,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 20px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-title span { color: var(--gold-light); }
+.hero-sub {
+  font-size: 17px;
+  color: rgba(255,255,255,0.55);
+  max-width: 480px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+}
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.hero-stat-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold-light);
+  display: block;
+}
+.hero-stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ── PROGRESS STRIP ── */
+.progress-strip {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  overflow-x: auto;
+}
+.progress-label {
+  font-size: 12px;
+  color: var(--mid);
+  white-space: nowrap;
+  font-weight: 500;
+}
+.progress-track {
+  flex: 1;
+  min-width: 120px;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 3px;
+  transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
+}
+.progress-pct {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+/* ── MAIN LAYOUT ── */
+.main-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+/* ── STEP CARDS ── */
+.step-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.step-card.active { border-color: var(--gold); }
+.step-card.done { border-color: #C8E6D3; }
+
+.step-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  cursor: pointer;
+  user-select: none;
+}
+.step-circle {
+  width: 40px; height: 40px; min-width: 40px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 600;
+  transition: all 0.3s;
+}
+.step-circle.pending { background: var(--border); color: var(--mid); }
+.step-circle.active { background: var(--gold); color: var(--ink); }
+.step-circle.done { background: var(--green); color: var(--white); font-size: 16px; }
+.step-circle.locked { background: var(--border); color: var(--step-locked); }
+
+.step-info { flex: 1; }
+.step-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.step-card.done .step-title { color: var(--green); }
+.step-card:not(.active):not(.done) .step-title { color: var(--mid); }
+.step-subtitle { font-size: 13px; color: var(--mid); margin-top: 2px; }
+
+.step-status {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 10px;
+}
+.step-status.s-active { background: var(--gold-pale); color: var(--gold); }
+.step-status.s-done { background: var(--green-light); color: var(--green); }
+.step-status.s-locked { background: var(--border); color: var(--step-locked); }
+
+.step-body {
+  display: none;
+  padding: 0 24px 28px;
+  border-top: 1px solid var(--border);
+}
+.step-body.open { display: block; }
+
+/* ── STEP BODY ELEMENTS ── */
+.step-intro {
+  padding: 16px 0 20px;
+  font-size: 15px;
+  color: var(--mid);
+  line-height: 1.75;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+
+.field-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 6px;
+  margin-top: 18px;
+  display: block;
+}
+.field-label:first-child { margin-top: 0; }
+
+input[type=text], input[type=email], input[type=number], select, textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--paper);
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--gold); background: var(--white); }
+textarea { min-height: 90px; resize: vertical; }
+
+/* ── TRACKER TABLE ── */
+.tracker-wrap { overflow-x: auto; margin: 4px 0 16px; }
+.tracker {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 480px;
+}
+.tracker th {
+  text-align: left;
+  padding: 9px 12px;
+  background: var(--paper);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--mid);
+  border-bottom: 1px solid var(--border);
+}
+.tracker td {
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--border);
+}
+.tracker tr:last-child td { border-bottom: none; }
+.tracker td input, .tracker td select {
+  margin: 0;
+  padding: 7px 10px;
+  font-size: 13px;
+}
+.add-row-btn {
+  background: none;
+  border: 1.5px dashed var(--border);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  color: var(--mid);
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  transition: all 0.15s;
+  margin-bottom: 16px;
+}
+.add-row-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── RESULT BOX ── */
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 16px 0;
+}
+.result-box {
+  background: var(--paper);
+  border-radius: 10px;
+  padding: 14px;
+  text-align: center;
+}
+.result-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 2px;
+}
+.result-lbl { font-size: 11px; color: var(--mid); text-transform: uppercase; letter-spacing: 0.8px; }
+.insight-box {
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 4px;
+}
+.insight-box.good { background: var(--green-light); color: var(--green); }
+.insight-box.warn { background: #FFF8EC; color: #7A5000; }
+.insight-box.bad { background: var(--red-light); color: var(--red); }
+
+/* ── CHECKLIST ── */
+.checklist { list-style: none; margin: 0 0 16px; }
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+.checklist li:last-child { border-bottom: none; }
+.check-sq {
+  width: 22px; height: 22px; min-width: 22px;
+  border-radius: 6px;
+  border: 1.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  margin-top: 1px;
+  transition: all 0.2s;
+  background: var(--white);
+}
+.checklist li.done .check-sq { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.checklist li.done .check-text { text-decoration: line-through; color: var(--mid); }
+.check-text { font-size: 14px; line-height: 1.5; }
+
+/* ── BUTTONS ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ink);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  padding: 13px 24px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.btn-primary:hover { background: #2A2520; transform: translateY(-1px); }
+.btn-gold {
+  background: var(--gold);
+  color: var(--ink);
+}
+.btn-gold:hover { background: #A07C22; }
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--border);
+}
+.btn-outline:hover { border-color: var(--gold); background: var(--gold-pale); color: var(--ink); }
+.btn-lg { padding: 16px 32px; font-size: 15px; }
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+
+/* ── EMAIL GATE ── */
+.email-gate {
+  background: var(--ink);
+  border-radius: 16px;
+  padding: 36px 32px;
+  text-align: center;
+  margin: 32px 0;
+}
+.gate-eyebrow {
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 12px; font-weight: 500;
+}
+.gate-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 600; color: var(--white);
+  margin-bottom: 10px; line-height: 1.2;
+}
+.gate-sub {
+  font-size: 14px; color: rgba(255,255,255,0.5);
+  margin-bottom: 24px; max-width: 380px; margin-left: auto; margin-right: auto;
+  line-height: 1.7;
+}
+.gate-form { display: flex; gap: 10px; max-width: 400px; margin: 0 auto 14px; }
+.gate-form input {
+  flex: 1; background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.15); color: var(--white);
+  border-radius: 10px;
+}
+.gate-form input::placeholder { color: rgba(255,255,255,0.3); }
+.gate-form input:focus { border-color: var(--gold); background: rgba(255,255,255,0.12); }
+.gate-privacy {
+  font-size: 12px; color: rgba(255,255,255,0.3);
+}
+
+/* ── UPGRADE BANNER ── */
+.upgrade-banner {
+  background: var(--ink);
+  border-radius: 16px;
+  padding: 40px 36px;
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.upgrade-text { flex: 1; min-width: 220px; }
+.upgrade-eyebrow {
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 8px; font-weight: 500;
+}
+.upgrade-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-weight: 600; color: var(--white);
+  margin-bottom: 8px; line-height: 1.2;
+}
+.upgrade-sub { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7; }
+.upgrade-price { text-align: center; }
+.price-was { font-size: 13px; color: rgba(255,255,255,0.3); text-decoration: line-through; margin-bottom: 2px; }
+.price-now {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px; font-weight: 700; color: var(--gold-light);
+  line-height: 1; margin-bottom: 14px; display: block;
+}
+.upgrade-features { list-style: none; margin: 20px 0 0; }
+.upgrade-features li {
+  font-size: 13px; color: rgba(255,255,255,0.55);
+  padding: 5px 0; display: flex; align-items: center; gap: 8px;
+}
+.upgrade-features li::before {
+  content: '';
+  width: 16px; height: 16px; min-width: 16px;
+  border-radius: 50%; background: var(--gold);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 10px; color: var(--ink; font-weight: 700;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8l3 3 7-6' stroke='%23141210' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: var(--gold);
+}
+
+/* ── COMPLETION SCREEN ── */
+.completion {
+  background: var(--ink);
+  border-radius: 16px;
+  padding: 48px 32px;
+  text-align: center;
+  display: none;
+}
+.completion.show { display: block; }
+.completion-icon {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin: 0 auto 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px;
+}
+.completion-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; font-weight: 600; color: var(--white); margin-bottom: 10px;
+}
+.completion-sub { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 400px; margin: 0 auto 28px; }
+
+/* ── TEASER LOCK ── */
+.teaser-lock {
+  background: linear-gradient(to bottom, transparent, var(--paper) 70%);
+  position: relative;
+  margin-top: -60px;
+  padding-top: 60px;
+  padding-bottom: 32px;
+  text-align: center;
+}
+.lock-icon {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--border);
+  margin: 0 auto 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.lock-text { font-size: 14px; color: var(--mid); margin-bottom: 16px; line-height: 1.6; }
+
+/* ── QUOTE ── */
+.pull-quote {
+  border-left: 3px solid var(--gold);
+  padding: 12px 18px;
+  margin: 20px 0;
+  background: var(--gold-pale);
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .site-header { padding: 0 20px; }
+  .hero { padding: 48px 20px 56px; }
+  .main-wrap { padding: 32px 16px 60px; }
+  .result-grid { grid-template-columns: 1fr 1fr; }
+  .gate-form { flex-direction: column; }
+  .upgrade-banner { flex-direction: column; text-align: center; }
+  .progress-strip { padding: 16px 20px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo">The Money Reset</div>
+  <div class="header-badge">Free Taster</div>
+</header>
+
+<section class="hero">
+  <div class="hero-eyebrow">Free mini-course</div>
+  <h1 class="hero-title">Find out exactly where<br>your money <span>goes</span></h1>
+  <p class="hero-sub">A 3-step money audit that takes 20 minutes and changes how you see your finances forever.</p>
+  <div class="hero-stats">
+    <div><span class="hero-stat-val">20 min</span><span class="hero-stat-label">to complete</span></div>
+    <div><span class="hero-stat-val">3 steps</span><span class="hero-stat-label">fully guided</span></div>
+    <div><span class="hero-stat-val">Free</span><span class="hero-stat-label">always</span></div>
+  </div>
+</section>
+
+<div class="progress-strip">
+  <span class="progress-label">Your progress</span>
+  <div class="progress-track"><div class="progress-fill" id="progressBar" style="width:0%"></div></div>
+  <span class="progress-pct" id="progressPct">0%</span>
+</div>
+
+<div class="main-wrap">
+
+  <!-- ── STEP 1: INCOME ── -->
+  <div class="step-card active" id="card-0">
+    <div class="step-head" onclick="toggleStep(0)">
+      <div class="step-circle active" id="circ-0">1</div>
+      <div class="step-info">
+        <div class="step-title">Track your income</div>
+        <div class="step-subtitle">Every pound coming in, every month</div>
+      </div>
+      <div class="step-status s-active">Active</div>
+    </div>
+    <div class="step-body open" id="body-0">
+      <div class="step-intro">
+        Most people know roughly what they earn but have never written it all down. This step takes 3 minutes and will already surprise you.
+      </div>
+
+      <span class="field-label">Your monthly income sources</span>
+      <div class="tracker-wrap">
+        <table class="tracker" id="incomeTable">
+          <thead><tr><th style="width:55%">Source</th><th>Monthly amount (£)</th></tr></thead>
+          <tbody id="incomeTbody">
+            <tr>
+              <td><input type="text" placeholder="e.g. Salary (after tax)" value="Salary (after tax)"></td>
+              <td><input type="number" placeholder="0" oninput="calcTotals()"></td>
+            </tr>
+            <tr>
+              <td><input type="text" placeholder="e.g. Freelance / side income"></td>
+              <td><input type="number" placeholder="0" oninput="calcTotals()"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button class="add-row-btn" onclick="addRow('incomeTbody')">+ Add income source</button>
+
+      <div class="result-grid" id="incomeResult" style="display:none">
+        <div class="result-box">
+          <span class="result-val" id="totalIncome" style="color:var(--green)">£0</span>
+          <span class="result-lbl">Total monthly income</span>
+        </div>
+        <div class="result-box">
+          <span class="result-val" id="weeklyIncome" style="color:var(--gold)">£0</span>
+          <span class="result-lbl">Per week</span>
+        </div>
+        <div class="result-box">
+          <span class="result-val" id="dailyIncome" style="color:var(--mid)">£0</span>
+          <span class="result-lbl">Per day</span>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-primary btn-gold" onclick="completeStep(0)">Save income & continue ✓</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── STEP 2: EXPENSES ── -->
+  <div class="step-card" id="card-1">
+    <div class="step-head" onclick="toggleStep(1)">
+      <div class="step-circle pending" id="circ-1">2</div>
+      <div class="step-info">
+        <div class="step-title">Map your expenses</div>
+        <div class="step-subtitle">Every pound going out, every month</div>
+      </div>
+      <div class="step-status s-locked" id="stat-1">Locked</div>
+    </div>
+    <div class="step-body" id="body-1">
+      <div class="step-intro">
+        Go through your last bank statement. Include everything — subscriptions, direct debits, regular spending. Most people discover at least one thing they'd completely forgotten about.
+      </div>
+
+      <span class="field-label">Monthly expenses</span>
+      <div class="tracker-wrap">
+        <table class="tracker">
+          <thead><tr><th style="width:40%">Expense</th><th style="width:28%">Category</th><th>Monthly (£)</th></tr></thead>
+          <tbody id="expenseTbody">
+            <tr>
+              <td><input type="text" value="Rent / mortgage"></td>
+              <td><select><option value="needs">Need</option><option value="wants">Want</option><option value="debt">Debt</option><option value="saving">Saving</option></select></td>
+              <td><input type="number" placeholder="0" oninput="calcTotals()"></td>
+            </tr>
+            <tr>
+              <td><input type="text" value="Utilities (gas, electric, water)"></td>
+              <td><select><option value="needs">Need</option><option value="wants">Want</option><option value="debt">Debt</option><option value="saving">Saving</option></select></td>
+              <td><input type="number" placeholder="0" oninput="calcTotals()"></td>
+            </tr>
+            <tr>
+              <td><input type="text" value="Food & groceries"></td>
+              <td><select><option value="needs">Need</option><option value="wants">Want</option><option value="debt">Debt</option><option value="saving">Saving</option></select></td>
+              <td><input type="number" placeholder="0" oninput="calcTotals()"></td>
+            </tr>
+            <tr>
+              <td><input type="text" value="Transport"></td>
+              <td><select><option value="needs">Need</option><option value="wants">Want</option><option value="debt">Debt</option><option value="saving">Saving</option></select></td>
+              <td><input type="number" placeholder="0" oninput="calcTotals()"></td>
+            </tr>
+            <tr>
+              <td><input type="text" value="Subscriptions"></td>
+              <td><select><option value="needs">Need</option><option value="wants" selected>Want</option><option value="debt">Debt</option><option value="saving">Saving</option></select></td>
+              <td><input type="number" placeholder="0" oninput="calcTotals()"></td>
+            </tr>
+            <tr>
+              <td><input type="text" value="Eating out / takeaways"></td>
+              <td><select><option value="needs">Need</option><option value="wants" selected>Want</option><option value="debt">Debt</option><option value="saving">Saving</option></select></td>
+              <td><input type="number" placeholder="0" oninput="calcTotals()"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button class="add-row-btn" onclick="addExpenseRow()">+ Add expense</button>
+
+      <div class="btn-row">
+        <button class="btn-primary btn-gold" onclick="completeStep(1)">See my audit results ✓</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── STEP 3: RESULTS ── -->
+  <div class="step-card" id="card-2">
+    <div class="step-head" onclick="toggleStep(2)">
+      <div class="step-circle pending" id="circ-2">3</div>
+      <div class="step-info">
+        <div class="step-title">Your audit results</div>
+        <div class="step-subtitle">Where your money actually goes</div>
+      </div>
+      <div class="step-status s-locked" id="stat-2">Locked</div>
+    </div>
+    <div class="step-body" id="body-2">
+      <div class="step-intro">
+        Here are your real numbers. Most people are shocked. Whatever you find — it's just data. And data can change.
+      </div>
+
+      <!-- Live results injected here -->
+      <div id="auditResults"></div>
+
+      <!-- EMAIL GATE -->
+      <div class="email-gate" id="emailGate">
+        <div class="gate-eyebrow">You're nearly there</div>
+        <h2 class="gate-title">Get your full breakdown<br>sent to your inbox</h2>
+        <p class="gate-sub">Enter your email and I'll send your personalised audit summary, plus the free budget template to fix what you found.</p>
+        <div class="gate-form">
+          <input type="email" id="gateEmail" placeholder="your@email.com">
+          <button class="btn-primary btn-gold" onclick="submitEmail()">Send it →</button>
+        </div>
+        <p class="gate-privacy">No spam. Unsubscribe any time. I take your inbox seriously.</p>
+      </div>
+
+      <!-- POST-EMAIL CONTENT (hidden until email submitted) -->
+      <div id="postEmail" style="display:none">
+        <div class="pull-quote">
+          "The audit is the most important thing you'll ever do for your finances. Not because it fixes anything — but because you can't fix what you haven't faced."
+        </div>
+
+        <span class="field-label" style="margin-top:24px">What did this reveal for you?</span>
+        <textarea id="reflectionText" placeholder="Write honestly — what surprised you most? What's the one thing you'll change this week?"></textarea>
+
+        <ul class="checklist" id="auditChecklist">
+          <li onclick="toggleCheck(this)"><div class="check-sq"></div><span class="check-text">I've looked at my real numbers honestly</span></li>
+          <li onclick="toggleCheck(this)"><div class="check-sq"></div><span class="check-text">I know which category I overspend on most</span></li>
+          <li onclick="toggleCheck(this)"><div class="check-sq"></div><span class="check-text">I've identified at least one thing I can cut this week</span></li>
+          <li onclick="toggleCheck(this)"><div class="check-sq"></div><span class="check-text">I understand my monthly income vs expenses gap</span></li>
+        </ul>
+
+        <div class="btn-row">
+          <button class="btn-primary btn-gold btn-lg" onclick="completeCourse()">Complete my free audit ✓</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── COMPLETION ── -->
+  <div class="completion" id="completionBlock">
+    <div class="completion-icon">✓</div>
+    <div class="completion-title">Audit complete.</div>
+    <p class="completion-sub">You've done what most people never do — you faced your numbers. That single act puts you ahead of 90% of people your age.</p>
+
+    <!-- UPGRADE OFFER -->
+    <div class="upgrade-banner" style="text-align:left;margin-top:0">
+      <div class="upgrade-text">
+        <div class="upgrade-eyebrow">Ready for the full system?</div>
+        <div class="upgrade-title">The 7-Day<br>Money Reset</div>
+        <p class="upgrade-sub">You've seen the problem. Now fix it — with a complete 7-day system, live trackers, debt destroyer, savings calculator, and automation blueprint.</p>
+        <ul class="upgrade-features">
+          <li>Full 7-day programme with interactive tasks</li>
+          <li>50/30/20 budget builder — personalised to you</li>
+          <li>Debt tracker with automatic payoff order</li>
+          <li>Emergency fund calculator</li>
+          <li>Automation flow — money on autopilot</li>
+          <li>Compound interest calculator</li>
+        </ul>
+        <div class="btn-row" style="margin-top:24px">
+          <a href="https://lifeguides2026.gumroad.com/l/vedhxl" target="_blank" class="btn-primary btn-gold btn-lg">Get the full course — £97 →</a>
+          <button onclick="openSales()" class="btn-primary btn-outline" style="color:rgba(255,255,255,0.6);border-color:rgba(255,255,255,0.15);cursor:pointer">Learn more ↓</button>
+        </div>
+      </div>
+      <div class="upgrade-price">
+        <div class="price-was">Usually £127</div>
+        <span class="price-now">£97</span>
+        <a href="https://lifeguides2026.gumroad.com/l/vedhxl" target="_blank" class="btn-primary btn-gold btn-lg" style="display:block">Start today →</a>
+        <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-top:12px">One-time payment. Yours forever.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main-wrap -->
+
+<script>
+const state = {
+  steps: [false, false, false],
+  income: 0,
+  expenses: 0,
+  emailSubmitted: false
+};
+
+function calcTotals() {
+  // income
+  let inc = 0;
+  document.querySelectorAll('#incomeTbody tr').forEach(r => {
+    const n = r.querySelector('input[type=number]');
+    if (n) inc += parseFloat(n.value) || 0;
+  });
+  state.income = inc;
+  if (inc > 0) {
+    document.getElementById('incomeResult').style.display = 'grid';
+    document.getElementById('totalIncome').textContent = '£' + Math.round(inc).toLocaleString();
+    document.getElementById('weeklyIncome').textContent = '£' + Math.round(inc / 4.33).toLocaleString();
+    document.getElementById('dailyIncome').textContent = '£' + Math.round(inc / 30).toLocaleString();
+  }
+  // expenses
+  let exp = 0;
+  document.querySelectorAll('#expenseTbody tr').forEach(r => {
+    const n = r.querySelector('input[type=number]');
+    if (n) exp += parseFloat(n.value) || 0;
+  });
+  state.expenses = exp;
+}
+
+function addRow(tbodyId) {
+  const tb = document.getElementById(tbodyId);
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td><input type="text" placeholder="Income source"></td><td><input type="number" placeholder="0" oninput="calcTotals()"></td>`;
+  tb.appendChild(tr);
+}
+
+function addExpenseRow() {
+  const tb = document.getElementById('expenseTbody');
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td><input type="text" placeholder="Expense name"></td>
+    <td><select><option value="needs">Need</option><option value="wants">Want</option><option value="debt">Debt</option><option value="saving">Saving</option></select></td>
+    <td><input type="number" placeholder="0" oninput="calcTotals()"></td>`;
+  tb.appendChild(tr);
+}
+
+function completeStep(n) {
+  calcTotals();
+  state.steps[n] = true;
+  // mark done
+  document.getElementById('card-' + n).classList.remove('active');
+  document.getElementById('card-' + n).classList.add('done');
+  document.getElementById('circ-' + n).className = 'step-circle done';
+  document.getElementById('circ-' + n).textContent = '✓';
+  document.getElementById('body-' + n).classList.remove('open');
+
+  // unlock next
+  const next = n + 1;
+  if (next < 3) {
+    if (next === 2) buildAuditResults();
+    document.getElementById('card-' + next).classList.add('active');
+    document.getElementById('circ-' + next).className = 'step-circle active';
+    document.getElementById('stat-' + next).textContent = 'Active';
+    document.getElementById('stat-' + next).className = 'step-status s-active';
+    document.getElementById('body-' + next).classList.add('open');
+  }
+  updateProgress();
+  setTimeout(() => {
+    const c = document.getElementById('card-' + (next < 3 ? next : n));
+    c.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+function toggleStep(n) {
+  const body = document.getElementById('body-' + n);
+  if (document.getElementById('card-' + n).classList.contains('active') ||
+      document.getElementById('card-' + n).classList.contains('done')) {
+    body.classList.toggle('open');
+  }
+}
+
+function buildAuditResults() {
+  calcTotals();
+  const inc = state.income;
+  const exp = state.expenses;
+  const left = inc - exp;
+  const spendPct = inc > 0 ? Math.round(exp / inc * 100) : 0;
+  let insightClass = 'good', insightText = '';
+  if (spendPct >= 90) {
+    insightClass = 'bad';
+    insightText = 'Your spending rate is very high. Almost nothing is left over for saving or investing. The good news: this is fixable — and you now know exactly where to look.';
+  } else if (spendPct >= 70) {
+    insightClass = 'warn';
+    insightText = 'You\'re spending most of what you earn. There\'s room to improve — and your Day 2 budget work will show you exactly where to find it.';
+  } else {
+    insightClass = 'good';
+    insightText = 'You have a healthy gap between income and expenses. The next step is making sure that gap is going somewhere intentional — not just disappearing.';
+  }
+
+  // category breakdown
+  let needs = 0, wants = 0, debt = 0, saving = 0;
+  document.querySelectorAll('#expenseTbody tr').forEach(r => {
+    const sel = r.querySelector('select');
+    const num = r.querySelector('input[type=number]');
+    if (!sel || !num) return;
+    const v = parseFloat(num.value) || 0;
+    if (sel.value === 'needs') needs += v;
+    else if (sel.value === 'wants') wants += v;
+    else if (sel.value === 'debt') debt += v;
+    else if (sel.value === 'saving') saving += v;
+  });
+
+  const bar = (val, total, color) => {
+    const w = total > 0 ? Math.min(Math.round(val / total * 100), 100) : 0;
+    return `<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+      <div style="flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden">
+        <div style="width:${w}%;height:100%;background:${color};border-radius:4px;transition:width 1s ease"></div>
+      </div>
+      <span style="font-size:13px;color:var(--mid);min-width:36px;text-align:right">${w}%</span>
+    </div>`;
+  };
+
+  document.getElementById('auditResults').innerHTML = `
+    <div class="result-grid" style="margin-bottom:12px">
+      <div class="result-box"><span class="result-val" style="color:var(--green)">£${Math.round(inc).toLocaleString()}</span><span class="result-lbl">Monthly income</span></div>
+      <div class="result-box"><span class="result-val" style="color:var(--red)">£${Math.round(exp).toLocaleString()}</span><span class="result-lbl">Monthly expenses</span></div>
+      <div class="result-box"><span class="result-val" style="color:${left >= 0 ? 'var(--green)' : 'var(--red)'}">£${Math.round(Math.abs(left)).toLocaleString()}</span><span class="result-lbl">${left >= 0 ? 'Left over' : 'Overspend'}</span></div>
+    </div>
+    <div class="insight-box ${insightClass}" style="margin-bottom:20px">${insightText}</div>
+    <span class="field-label">Where your expenses go</span>
+    <div style="margin:10px 0 20px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:13px;font-weight:500">Needs</span><span style="font-size:13px;color:var(--mid)">£${Math.round(needs).toLocaleString()}</span></div>
+      ${bar(needs, exp, 'var(--green)')}
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px;margin-top:8px"><span style="font-size:13px;font-weight:500">Wants</span><span style="font-size:13px;color:var(--mid)">£${Math.round(wants).toLocaleString()}</span></div>
+      ${bar(wants, exp, 'var(--gold)')}
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px;margin-top:8px"><span style="font-size:13px;font-weight:500">Debt repayments</span><span style="font-size:13px;color:var(--mid)">£${Math.round(debt).toLocaleString()}</span></div>
+      ${bar(debt, exp, 'var(--red)')}
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px;margin-top:8px"><span style="font-size:13px;font-weight:500">Savings</span><span style="font-size:13px;color:var(--mid)">£${Math.round(saving).toLocaleString()}</span></div>
+      ${bar(saving, exp, '#185FA5')}
+    </div>`;
+}
+
+function submitEmail() {
+  const email = document.getElementById('gateEmail').value;
+  if (!email || !email.includes('@')) {
+    document.getElementById('gateEmail').style.borderColor = '#C0392B';
+    document.getElementById('gateEmail').focus();
+    return;
+  }
+
+  const btn = document.querySelector('#emailGate .btn-gold');
+  if (btn) { btn.textContent = 'Sending...'; btn.style.opacity = '0.7'; btn.disabled = true; }
+
+  const formData = new FormData();
+  formData.append('email_address', email);
+  formData.append('first_name', '');
+
+  fetch('https://app.kit.com/landing_pages/60ae16096c/subscribe', {
+    method: 'POST',
+    body: formData,
+    mode: 'no-cors'
+  }).catch(function() {});
+
+  state.emailSubmitted = true;
+  state.email = email;
+
+  setTimeout(function() {
+    document.getElementById('emailGate').style.display = 'none';
+    document.getElementById('postEmail').style.display = 'block';
+    document.getElementById('postEmail').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 800);
+}
+
+function toggleCheck(el) {
+  el.classList.toggle('done');
+  const sq = el.querySelector('.check-sq');
+  sq.textContent = el.classList.contains('done') ? '✓' : '';
+}
+
+function completeCourse() {
+  state.steps[2] = true;
+  document.getElementById('card-2').classList.remove('active');
+  document.getElementById('card-2').classList.add('done');
+  document.getElementById('circ-2').className = 'step-circle done';
+  document.getElementById('circ-2').textContent = '✓';
+  document.getElementById('body-2').classList.remove('open');
+  updateProgress();
+  document.getElementById('completionBlock').classList.add('show');
+  setTimeout(() => {
+    document.getElementById('completionBlock').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 200);
+}
+
+function updateProgress() {
+  const done = state.steps.filter(Boolean).length;
+  const pct = Math.round(done / 3 * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+}
+</script>
+</body>
+</html>
+<!-- INJECTED: Sales persuasion section -->
+<style>
+.sales-section {
+  display: none;
+  max-width: 100%;
+  overflow: hidden;
+}
+.sales-section.open { display: block; }
+
+/* Pain */
+.sp-pain { background: var(--white); border-top: 3px solid var(--gold); padding: 60px 40px; }
+.sp-eyebrow {
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 14px; font-weight: 500;
+}
+.sp-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 44px); font-weight: 700;
+  line-height: 1.15; margin-bottom: 16px; max-width: 760px; margin-left: auto; margin-right: auto; text-align: center;
+}
+.sp-body {
+  font-size: 16px; color: var(--mid); line-height: 1.8;
+  max-width: 600px; margin: 0 auto 32px; text-align: center;
+}
+.sp-inner { max-width: 760px; margin: 0 auto; }
+
+.pain-list-s { list-style: none; max-width: 640px; margin: 0 auto; }
+.pain-list-s li {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 15px 0; border-bottom: 1px solid var(--border);
+  font-size: 15px; color: var(--ink); line-height: 1.6;
+}
+.pain-list-s li:last-child { border-bottom: none; }
+.pain-dot-s { width: 8px; height: 8px; min-width: 8px; border-radius: 50%; background: var(--red,#8B2020); margin-top: 7px; }
+
+/* Transform */
+.sp-transform { background: var(--paper); padding: 60px 40px; }
+.transform-grid-s {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  max-width: 680px; margin: 28px auto 0;
+}
+.tc-s { border-radius: 12px; padding: 22px; }
+.tc-s.before { background: #FAEAEA; }
+.tc-s.after { background: var(--green-light,#EAF4EE); }
+.tc-label-s {
+  font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.tc-s.before .tc-label-s { color: var(--red,#8B2020); }
+.tc-s.after .tc-label-s { color: var(--green,#2A5C45); }
+.tc-list-s { list-style: none; }
+.tc-list-s li {
+  font-size: 14px; padding: 6px 0;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  display: flex; align-items: flex-start; gap: 8px; line-height: 1.5;
+}
+.tc-list-s li:last-child { border-bottom: none; }
+.tc-s.before .tc-list-s li { color: var(--red,#8B2020); }
+.tc-s.after .tc-list-s li { color: var(--green,#2A5C45); }
+
+/* Modules */
+.sp-modules { background: var(--ink); padding: 60px 40px; }
+.sp-modules-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(26px, 4vw, 40px); font-weight: 700;
+  color: white; text-align: center; margin-bottom: 8px;
+}
+.sp-modules-sub { font-size: 15px; color: rgba(255,255,255,.4); text-align: center; margin-bottom: 36px; }
+.modules-grid-s { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 760px; margin: 0 auto; }
+.mod-card-s {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px; padding: 20px 22px;
+  transition: border-color .2s;
+}
+.mod-card-s:hover { border-color: rgba(184,146,42,.35); }
+.mod-day-s { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.mod-title-s {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px; font-weight: 600; color: white; margin-bottom: 8px;
+}
+.mod-desc-s { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.65; }
+.mod-feats-s { list-style: none; margin-top: 10px; }
+.mod-feats-s li {
+  font-size: 12px; color: rgba(255,255,255,.35);
+  padding: 3px 0; display: flex; align-items: center; gap: 7px;
+}
+.mod-feats-s li::before {
+  content: ''; width: 13px; height: 13px; min-width: 13px; flex-shrink: 0;
+  border-radius: 50%; background: rgba(184,146,42,.18);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 13 13'%3E%3Cpath d='M2 6.5l3 3 6-6' stroke='%23B8922A' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: 9px; background-repeat: no-repeat; background-position: center;
+}
+
+/* Value stack */
+.sp-value { background: var(--paper); padding: 60px 40px; }
+.value-stack-s { max-width: 600px; margin: 28px auto 0; }
+.vrow-s {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 13px 18px; border-radius: 9px; margin-bottom: 7px;
+  background: var(--white); border: 1px solid var(--border);
+}
+.vitem-s { font-size: 15px; color: var(--ink); font-weight: 500; }
+.vprice-s { font-size: 15px; color: var(--mid); }
+.vtotal-s {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 18px; border-radius: 9px; margin-top: 4px;
+  background: var(--gold-pale,#FAF4E6); border: 1px solid var(--gold-light,#E8D5A3);
+}
+.vtotal-label-s { font-size: 15px; font-weight: 600; color: var(--ink); }
+.vtotal-price-s {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 700; color: var(--gold);
+}
+
+/* Testimonials */
+.sp-testi { background: var(--white); border-top: 1px solid var(--border); padding: 60px 40px; }
+.testi-grid-s { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 720px; margin: 28px auto 0; }
+.tc2 {
+  background: var(--paper); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px 22px;
+}
+.tc2-stars { color: var(--gold); font-size: 13px; letter-spacing: 2px; margin-bottom: 10px; }
+.tc2-quote { font-size: 14px; color: var(--ink); line-height: 1.75; font-style: italic; margin-bottom: 14px; }
+.tc2-author { display: flex; align-items: center; gap: 10px; }
+.tc2-av {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--gold-pale,#FAF4E6); display: flex; align-items: center;
+  justify-content: center; font-size: 12px; font-weight: 600;
+  color: var(--gold); flex-shrink: 0;
+}
+.tc2-name { font-size: 14px; font-weight: 500; color: var(--ink); }
+.tc2-loc { font-size: 12px; color: var(--mid); }
+
+/* FAQ */
+.sp-faq { background: var(--paper); padding: 60px 40px; }
+.faq-wrap-s { max-width: 640px; margin: 28px auto 0; }
+.faq-item-s { border-bottom: 1px solid var(--border); padding: 18px 0; }
+.faq-item-s:first-child { border-top: 1px solid var(--border); }
+.faq-q-s {
+  font-size: 15px; font-weight: 500; color: var(--ink);
+  cursor: pointer; display: flex; justify-content: space-between;
+  align-items: center; gap: 16px; user-select: none;
+}
+.faq-ic { font-size: 18px; color: var(--mid); transition: transform .2s; flex-shrink: 0; }
+.faq-ic.op { transform: rotate(45deg); }
+.faq-a-s {
+  display: none; font-size: 14px; color: var(--mid);
+  line-height: 1.75; padding-top: 10px;
+}
+.faq-a-s.op { display: block; }
+
+/* Final CTA */
+.sp-finalcta { background: var(--ink); padding: 72px 40px; text-align: center; }
+.sp-final-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(30px, 5vw, 52px); font-weight: 900;
+  color: white; line-height: 1.1; margin-bottom: 16px;
+}
+.sp-final-title span { color: var(--gold-light,#E8D5A3); }
+.sp-final-sub { font-size: 16px; color: rgba(255,255,255,.45); max-width: 460px; margin: 0 auto 32px; line-height: 1.75; }
+.sp-price-row { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 24px; flex-wrap: wrap; }
+.sp-was { font-size: 16px; color: rgba(255,255,255,.3); text-decoration: line-through; }
+.sp-now { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 700; color: var(--gold-light,#E8D5A3); line-height: 1; }
+.sp-bigbtn {
+  display: inline-block; background: var(--gold); color: var(--ink);
+  padding: 18px 52px; border-radius: 12px; font-size: 16px; font-weight: 600;
+  transition: all .2s; text-decoration: none;
+}
+.sp-bigbtn:hover { background: #A07C22; transform: translateY(-2px); }
+.sp-note { font-size: 13px; color: rgba(255,255,255,.25); margin-top: 14px; }
+
+/* Sticky bar */
+.sticky-cta {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--ink); border-top: 1px solid rgba(255,255,255,.08);
+  padding: 12px 40px; display: flex; align-items: center;
+  justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  z-index: 200; transform: translateY(100%); transition: transform .3s ease;
+}
+.sticky-cta.show { transform: translateY(0); }
+.sticky-cta-text { font-size: 14px; color: rgba(255,255,255,.65); }
+.sticky-cta-text b { color: white; font-weight: 500; }
+.sticky-cta-btn {
+  background: var(--gold); color: var(--ink); padding: 10px 26px;
+  border-radius: 8px; font-size: 13px; font-weight: 600;
+  white-space: nowrap; text-decoration: none; transition: background .2s;
+}
+.sticky-cta-btn:hover { background: #A07C22; }
+
+@media(max-width:600px){
+  .sp-pain,.sp-transform,.sp-modules,.sp-value,.sp-testi,.sp-faq,.sp-finalcta { padding: 48px 20px; }
+  .transform-grid-s,.modules-grid-s,.testi-grid-s { grid-template-columns: 1fr; }
+  .sticky-cta { padding: 12px 20px; }
+}
+</style>
+
+<!-- THE SALES SECTION — hidden until Learn More clicked -->
+<div id="salesSection" style="display:none">
+
+  <!-- PAIN -->
+  <div class="sp-pain">
+    <div class="sp-inner">
+      <div class="sp-eyebrow" style="text-align:center">Does this sound familiar?</div>
+      <h2 class="sp-title">You earn a decent income.<br>So why does it always feel tight?</h2>
+      <p class="sp-body">Most people aren't struggling because they earn too little. They're struggling because nobody ever taught them how money actually works.</p>
+      <ul class="pain-list-s">
+        <li><div class="pain-dot-s"></div>You check your bank account and feel that familiar knot in your stomach — even though payday was only last week.</li>
+        <li><div class="pain-dot-s"></div>You've tried budgeting apps, spreadsheets, and fresh starts — but nothing sticks longer than two weeks.</li>
+        <li><div class="pain-dot-s"></div>You know you should be saving but genuinely don't know where the money would come from.</li>
+        <li><div class="pain-dot-s"></div>An unexpected bill sends you into a panic because there's no buffer to catch it.</li>
+        <li><div class="pain-dot-s"></div>You earn more than you did two years ago but you're no further ahead financially.</li>
+        <li><div class="pain-dot-s"></div>The cycle repeats every single month and nothing changes.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TRANSFORM -->
+  <div class="sp-transform">
+    <div class="sp-inner">
+      <div class="sp-eyebrow" style="text-align:center">The transformation</div>
+      <h2 class="sp-title">Before the reset. After the reset.</h2>
+      <p class="sp-body" style="text-align:center">This course doesn't give you more willpower. It gives you a system — so you don't need willpower.</p>
+      <div class="transform-grid-s">
+        <div class="tc-s before">
+          <div class="tc-label-s">Before</div>
+          <ul class="tc-list-s">
+            <li>Avoiding your bank app</li>
+            <li>No idea where it goes</li>
+            <li>"I'll save next month"</li>
+            <li>Panic at unexpected bills</li>
+            <li>Guilt every time you spend</li>
+            <li>Same cycle every month</li>
+            <li>Zero investment plan</li>
+          </ul>
+        </div>
+        <div class="tc-s after">
+          <div class="tc-label-s">After</div>
+          <ul class="tc-list-s">
+            <li>Opening your app with confidence</li>
+            <li>Every pound has a purpose</li>
+            <li>Savings happen automatically</li>
+            <li>3-month emergency buffer built</li>
+            <li>Spend freely within your system</li>
+            <li>A system that runs itself</li>
+            <li>Investing started and compounding</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULES -->
+  <div class="sp-modules">
+    <div class="sp-modules-title">7 days. 7 complete systems.</div>
+    <div class="sp-modules-sub">Every day builds on the last. By day 7, everything works together.</div>
+    <div class="modules-grid-s">
+      <div class="mod-card-s">
+        <div class="mod-day-s">Day 1</div>
+        <div class="mod-title-s">The Money Audit</div>
+        <div class="mod-desc-s">Find exactly where every pound goes. Most people discover they're leaking hundreds every month.</div>
+        <ul class="mod-feats-s"><li>Live income tracker</li><li>Full expense audit</li><li>Real-time spending analysis</li></ul>
+      </div>
+      <div class="mod-card-s">
+        <div class="mod-day-s">Day 2</div>
+        <div class="mod-title-s">Build Your Budget</div>
+        <div class="mod-desc-s">Set up the 50/30/20 system personalised to your exact income — instantly calculated.</div>
+        <ul class="mod-feats-s"><li>Interactive budget builder</li><li>Weekly spending calculator</li><li>Overspend identifier</li></ul>
+      </div>
+      <div class="mod-card-s">
+        <div class="mod-day-s">Day 3</div>
+        <div class="mod-title-s">Destroy Your Debt</div>
+        <div class="mod-desc-s">A live debt tracker that sorts your payoff order automatically — saving you the most in interest.</div>
+        <ul class="mod-feats-s"><li>Avalanche vs snowball calculator</li><li>Auto-sorted payoff order</li><li>Monthly milestone tracker</li></ul>
+      </div>
+      <div class="mod-card-s">
+        <div class="mod-day-s">Day 4</div>
+        <div class="mod-title-s">Build Your Safety Net</div>
+        <div class="mod-desc-s">Calculate your exact emergency fund target and how fast you can reach it at different saving rates.</div>
+        <ul class="mod-feats-s"><li>Emergency fund calculator</li><li>Visual progress tracker</li><li>UK bank recommendations</li></ul>
+      </div>
+      <div class="mod-card-s">
+        <div class="mod-day-s">Day 5</div>
+        <div class="mod-title-s">Automate Everything</div>
+        <div class="mod-desc-s">Design a payday money flow that handles itself — savings, debt, bills — before you spend a penny.</div>
+        <ul class="mod-feats-s"><li>Payday automation blueprint</li><li>UK-specific setup checklist</li><li>Bills pot system</li></ul>
+      </div>
+      <div class="mod-card-s">
+        <div class="mod-day-s">Day 6</div>
+        <div class="mod-title-s">Grow Your Money</div>
+        <div class="mod-desc-s">Start investing without the jargon. See exactly how much your money grows over time.</div>
+        <ul class="mod-feats-s"><li>Compound interest calculator</li><li>Stocks & Shares ISA guide</li><li>Beginner investment checklist</li></ul>
+      </div>
+      <div class="mod-card-s">
+        <div class="mod-day-s">Day 7</div>
+        <div class="mod-title-s">Your Money System</div>
+        <div class="mod-desc-s">Review everything you've built, lock in your monthly habits, and commit to the next 12 months.</div>
+        <ul class="mod-feats-s"><li>Full system review dashboard</li><li>Monthly habit tracker</li><li>Letter to future you exercise</li></ul>
+      </div>
+      <div class="mod-card-s" style="border-color:rgba(184,146,42,.3);background:rgba(184,146,42,.05)">
+        <div class="mod-day-s">Bonus</div>
+        <div class="mod-title-s">Lifetime updates</div>
+        <div class="mod-desc-s">Every time the course is updated — new content, new tools, new trackers — you get it free. Forever.</div>
+        <ul class="mod-feats-s"><li>All future updates included</li><li>Works on any device</li><li>No expiry date ever</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- VALUE STACK -->
+  <div class="sp-value">
+    <div class="sp-inner">
+      <div class="sp-eyebrow" style="text-align:center">What it's worth</div>
+      <h2 class="sp-title" style="text-align:center">Everything included<br>for one payment of £97.</h2>
+      <div class="value-stack-s">
+        <div class="vrow-s"><span class="vitem-s">7-day guided programme</span><span class="vprice-s">£49</span></div>
+        <div class="vrow-s"><span class="vitem-s">Live budget builder tool</span><span class="vprice-s">£19/year</span></div>
+        <div class="vrow-s"><span class="vitem-s">Debt payoff calculator</span><span class="vprice-s">£15</span></div>
+        <div class="vrow-s"><span class="vitem-s">Emergency fund calculator</span><span class="vprice-s">£10</span></div>
+        <div class="vrow-s"><span class="vitem-s">Compound interest calculator</span><span class="vprice-s">£10</span></div>
+        <div class="vrow-s"><span class="vitem-s">UK automation guide</span><span class="vprice-s">£24</span></div>
+        <div class="vtotal-s"><span class="vtotal-label-s">Your price today</span><span class="vtotal-price-s">£97</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="sp-testi">
+    <div class="sp-inner">
+      <div class="sp-eyebrow" style="text-align:center">Early results</div>
+      <h2 class="sp-title" style="text-align:center">What people found<br>on day one.</h2>
+      <div class="testi-grid-s">
+        <div class="tc2">
+          <div class="tc2-stars">★★★★★</div>
+          <div class="tc2-quote">"Found £186 a month in subscriptions I'd completely forgotten about. Course paid for itself in the first hour."</div>
+          <div class="tc2-author"><div class="tc2-av">SJ</div><div><div class="tc2-name">Sarah J.</div><div class="tc2-loc">28, London</div></div></div>
+        </div>
+        <div class="tc2">
+          <div class="tc2-stars">★★★★★</div>
+          <div class="tc2-quote">"The debt tracker showed I was paying £340 extra a year in interest by targeting the wrong debt. Avalanche method is a game changer."</div>
+          <div class="tc2-author"><div class="tc2-av">MK</div><div><div class="tc2-name">Marcus K.</div><div class="tc2-loc">34, Manchester</div></div></div>
+        </div>
+        <div class="tc2">
+          <div class="tc2-stars">★★★★★</div>
+          <div class="tc2-quote">"I've tried every budgeting app. This is the first thing that actually changed my behaviour instead of just tracking it."</div>
+          <div class="tc2-author"><div class="tc2-av">PT</div><div><div class="tc2-name">Priya T.</div><div class="tc2-loc">31, Birmingham</div></div></div>
+        </div>
+        <div class="tc2">
+          <div class="tc2-stars">★★★★★</div>
+          <div class="tc2-quote">"Set up payday automation on day 5. First time in three years I've had money left at month end. Properly life-changing."</div>
+          <div class="tc2-author"><div class="tc2-av">RL</div><div><div class="tc2-name">Ryan L.</div><div class="tc2-loc">26, Leeds</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="sp-faq">
+    <div class="sp-inner">
+      <div class="sp-eyebrow" style="text-align:center">Questions</div>
+      <h2 class="sp-title" style="text-align:center;margin-bottom:0">Everything you need to know.</h2>
+      <div class="faq-wrap-s" id="faqWrap"></div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="sp-finalcta">
+    <div class="sp-eyebrow">Ready to reset?</div>
+    <h2 class="sp-final-title">Your money.<br><span>Finally making sense.</span></h2>
+    <p class="sp-final-sub">7 days. A complete money system. One payment, no subscription, yours forever.</p>
+    <div class="sp-price-row">
+      <span class="sp-was">Usually £127</span>
+      <span class="sp-now">£97</span>
+    </div>
+    <a href="https://lifeguides2026.gumroad.com/l/vedhxl" target="_blank" class="sp-bigbtn">Get instant access — £97 →</a>
+    <p class="sp-note">One-time payment · Instant access · Lifetime updates · No subscription</p>
+  </div>
+
+</div><!-- /salesSection -->
+
+<!-- STICKY BAR -->
+<div class="sticky-cta" id="stickyCta">
+  <span class="sticky-cta-text"><b>The 7-Day Money Reset</b> — fix your finances in one week</span>
+  <a href="https://lifeguides2026.gumroad.com/l/vedhxl" target="_blank" class="sticky-cta-btn">Get access — £97 →</a>
+</div>
+
+<script>
+const sfaqs = [
+  { q:'Do I need any financial knowledge to start?', a:'None at all. The course starts from scratch — your first task is simply writing down your income and expenses. Everything is explained in plain English with zero jargon.' },
+  { q:'How long does each day take?', a:'Each day is designed to take 30–60 minutes. Some days are shorter. You go at your own pace — there are no deadlines or expiry dates.' },
+  { q:'Is this relevant to UK finances specifically?', a:'Yes — built specifically for UK residents. It covers ISAs, workplace pensions, UK banks like Monzo and Starling, council tax, standing orders, and the UK tax system.' },
+  { q:'I\'ve tried budgeting before and it never works. Why would this be different?', a:'Because this course doesn\'t rely on tracking or willpower. The core idea is automation — your money goes where it needs to go before you can spend it. No daily discipline required once the system is set up.' },
+  { q:'What if I have a lot of debt? Will this still help?', a:'Especially so. Day 3 is entirely about debt — a live tracker that sorts your debts in the order that saves you the most money in interest.' },
+  { q:'How do I access the course after purchase?', a:'Immediately after payment via Gumroad you\'ll receive a download link by email. The course opens in any browser on any device. No app needed.' },
+  { q:'Is there a refund policy?', a:'Because this is a digital product with instant access, all sales are final. The free taster above lets you experience the quality before you buy — try it first.' },
+];
+
+const fw = document.getElementById('faqWrap');
+if(fw) {
+  sfaqs.forEach((f,i) => {
+    const d = document.createElement('div');
+    d.className = 'faq-item-s';
+    d.innerHTML = `<div class="faq-q-s" onclick="sfaq(${i})"><span>${f.q}</span><span class="faq-ic" id="sfi${i}">+</span></div><div class="faq-a-s" id="sfa${i}">${f.a}</div>`;
+    fw.appendChild(d);
+  });
+}
+
+function sfaq(i) {
+  const a = document.getElementById('sfa'+i);
+  const ic = document.getElementById('sfi'+i);
+  const op = a.classList.toggle('op');
+  ic.classList.toggle('op', op);
+}
+
+function openSales() {
+  var sec = document.getElementById('salesSection');
+  sec.style.display = 'block';
+  setTimeout(function() {
+    sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 80);
+}
+
+const stBar = document.getElementById('stickyCta');
+window.addEventListener('scroll', () => {
+  if(stBar) stBar.classList.toggle('show', window.scrollY > 600);
+});
+</script>
