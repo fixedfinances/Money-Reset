@@ -927,34 +927,62 @@ function buildAuditResults() {
 }
 
 function submitEmail() {
-  const email = document.getElementById('gateEmail').value;
+  var email = document.getElementById('gateEmail').value;
   if (!email || !email.includes('@')) {
     document.getElementById('gateEmail').style.borderColor = '#C0392B';
     document.getElementById('gateEmail').focus();
     return;
   }
 
-  const btn = document.querySelector('#emailGate .btn-gold');
+  var btn = document.querySelector('#emailGate .btn-gold');
   if (btn) { btn.textContent = 'Sending...'; btn.style.opacity = '0.7'; btn.disabled = true; }
 
-  const formData = new FormData();
-  formData.append('email_address', email);
-  formData.append('first_name', '');
+  // Create a hidden iframe to handle the cross-origin Kit form submission
+  var iframe = document.getElementById('kitFrame');
+  if (!iframe) {
+    iframe = document.createElement('iframe');
+    iframe.id = 'kitFrame';
+    iframe.name = 'kitFrame';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+  }
 
-  fetch('https://app.kit.com/landing_pages/60ae16096c/subscribe', {
-    method: 'POST',
-    body: formData,
-    mode: 'no-cors'
-  }).catch(function() {});
+  // Create a hidden form that posts to Kit inside the iframe
+  var form = document.createElement('form');
+  form.method = 'POST';
+  form.action = 'https://app.kit.com/landing_pages/60ae16096c/subscribe';
+  form.target = 'kitFrame';
+  form.style.display = 'none';
+
+  var emailInput = document.createElement('input');
+  emailInput.type = 'hidden';
+  emailInput.name = 'email_address';
+  emailInput.value = email;
+  form.appendChild(emailInput);
+
+  var firstNameInput = document.createElement('input');
+  firstNameInput.type = 'hidden';
+  firstNameInput.name = 'first_name';
+  firstNameInput.value = '';
+  form.appendChild(firstNameInput);
+
+  document.body.appendChild(form);
+  form.submit();
+
+  // Clean up the form after submission
+  setTimeout(function() { 
+    if (form.parentNode) form.parentNode.removeChild(form); 
+  }, 3000);
 
   state.emailSubmitted = true;
   state.email = email;
 
+  // Unlock the content after a short delay
   setTimeout(function() {
     document.getElementById('emailGate').style.display = 'none';
     document.getElementById('postEmail').style.display = 'block';
     document.getElementById('postEmail').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 800);
+  }, 1000);
 }
 
 function toggleCheck(el) {
